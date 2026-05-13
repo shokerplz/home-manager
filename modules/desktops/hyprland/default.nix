@@ -22,7 +22,7 @@
     home.packages = with pkgs; [
       wl-clipboard
       wtype
-      nautilus
+      kdePackages.dolphin
       loupe
       mpv
       celluloid

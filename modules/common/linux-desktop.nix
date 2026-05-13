@@ -24,6 +24,10 @@
       x11.enable = true;
     };
 
+    home.packages = with pkgs; [
+      kdePackages.breeze-icons
+    ];
+
     gtk = {
       enable = true;
       theme = {
@@ -46,11 +50,19 @@
 
     qt = {
       enable = true;
-      platformTheme.name = "adwaita";
-      style = {
-        name = "adwaita-dark";
-        package = pkgs.adwaita-qt;
-      };
+      platformTheme.name = "kde";
+      style.name = "breeze";
     };
+
+    xdg.configFile."kdeglobals".text = ''
+      [General]
+      ColorScheme=BreezeDark
+
+      [Icons]
+      Theme=breeze-dark
+
+      [KDE]
+      widgetStyle=Breeze
+    '';
   };
 }

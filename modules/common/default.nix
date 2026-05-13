@@ -24,7 +24,6 @@
       enable = true;
       sessionVariables = {
         TERMINAL = "alacritty";
-        QT_QPA_PLATFORMTHEME = "adwaita";
       };
       historyControl = [
         "ignoredups"
