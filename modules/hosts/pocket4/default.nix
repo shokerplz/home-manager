@@ -18,7 +18,11 @@
         self.homeModules.commonLinuxDesktop
         ./_packages.nix
         ./_programs.nix
-        {
+        ({
+          lib,
+          pkgs,
+          ...
+        }: {
           home = {
             username = "ikovalev";
             homeDirectory = "/home/ikovalev";
@@ -26,7 +30,18 @@
           };
 
           dotfiles.noctalia.settingsFile = ./noctalia.json;
-        }
+
+          wayland.windowManager.hyprland.settings = {
+            input = {
+              touchdevice.transform = 3;
+              tablet.transform = 3;
+            };
+
+            exec-once = lib.mkAfter [
+              "${lib.getExe pkgs.iio-hyprland} --transform 3,0,1,2 eDP-1"
+            ];
+          };
+        })
       ];
     });
 }

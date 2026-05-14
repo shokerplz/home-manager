@@ -74,11 +74,6 @@
       systemd.enable = false;
 
       settings = {
-        device = {
-          name = "nvtk0603:00-0603:f001";
-          transform = 3;
-        };
-
         "$mod" = "SUPER";
 
         monitor = [",preferred,auto,1"];
