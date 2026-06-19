@@ -72,6 +72,7 @@
       enable = true;
       xwayland.enable = true;
       systemd.enable = false;
+      configType = "hyprlang";
 
       settings = {
         "$mod" = "SUPER";
@@ -148,18 +149,11 @@
           sensitivity = -0.7;
         };
 
-        windowrulev2 = [
-          "float, class:^(pavucontrol)$"
-          "size (monitor_w*0.6) (monitor_h*0.6), class:^(pavucontrol)$"
-          "center, class:^(pavucontrol)$"
-          "float, class:^(blueman-manager)$"
-          "size (monitor_w*0.5) (monitor_h*0.6), class:^(blueman-manager)$"
-          "center, class:^(blueman-manager)$"
-          "float, class:^(nm-connection-editor)$"
-          "size (monitor_w*0.5) (monitor_h*0.6), class:^(nm-connection-editor)$"
-          "center, class:^(nm-connection-editor)$"
-          "float, title:^(Calendar)$"
-          "center, title:^(Calendar)$"
+        windowrule = [
+          "float 1, size (monitor_w*0.6) (monitor_h*0.6), center 1, match:class ^(pavucontrol)$"
+          "float 1, size (monitor_w*0.5) (monitor_h*0.6), center 1, match:class ^(blueman-manager)$"
+          "float 1, size (monitor_w*0.5) (monitor_h*0.6), center 1, match:class ^(nm-connection-editor)$"
+          "float 1, center 1, match:title ^(Calendar)$"
         ];
 
         bind = [
