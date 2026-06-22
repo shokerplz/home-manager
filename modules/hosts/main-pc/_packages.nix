@@ -7,10 +7,20 @@
       hash = "sha256-RlVhl9zC+1UUDgsecMKLTE2jII8SpKJSIBKDfJ137hA=";
     };
     extraPkgs = pkgs: with pkgs; [
+      gst_all_1.gst-libav
+      gst_all_1.gst-plugins-bad
+      (gst_all_1.gst-plugins-good.override {gtkSupport = true;})
       libsoup_3
       webkitgtk_4_1
     ];
   };
+  orca-slicer-mime-types = [
+    "application/sla"
+    "application/vnd.ms-3mfdocument"
+    "application/x-amf"
+    "model/3mf"
+    "model/stl"
+  ];
 in {
   home.packages = with pkgs; [
     vlc
@@ -31,8 +41,9 @@ in {
 
   xdg.desktopEntries.orca-slicer = {
     name = "OrcaSlicer";
-    exec = "orca-slicer";
+    exec = "orca-slicer %F";
     terminal = false;
     categories = ["Graphics" "3DGraphics" "Engineering"];
+    mimeType = orca-slicer-mime-types;
   };
 }
