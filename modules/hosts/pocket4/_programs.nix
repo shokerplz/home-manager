@@ -12,6 +12,10 @@
     antigravity-cli.enable = true;
     opencode = {
       enable = true;
+      settings.permission = {
+        edit = "ask";
+        bash = "ask";
+      };
       settings.mcp.playwright = {
         type = "local";
         command = [

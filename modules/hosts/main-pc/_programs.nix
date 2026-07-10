@@ -12,6 +12,10 @@
     antigravity-cli.enable = true;
     opencode = {
       enable = true;
+      settings.permission = {
+        edit = "ask";
+        bash = "ask";
+      };
       settings.mcp.playwright = {
         type = "local";
         command = [
@@ -23,6 +27,16 @@
           "--user-data-dir"
           "${config.xdg.cacheHome}/playwright-mcp"
         ];
+        enabled = true;
+      };
+      settings.mcp.searxng = {
+        type = "local";
+        command = [
+          "npx"
+          "-y"
+          "mcp-searxng"
+        ];
+        environment.SEARXNG_URL = "https://search.ikovalev.nl";
         enabled = true;
       };
     };
