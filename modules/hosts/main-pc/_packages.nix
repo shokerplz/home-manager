@@ -1,18 +1,19 @@
 {pkgs, ...}: let
   orca-slicer-appimage = pkgs.appimageTools.wrapType2 {
     pname = "orca-slicer";
-    version = "2.4.0";
+    version = "2.4.2";
     src = pkgs.fetchurl {
-      url = "https://github.com/OrcaSlicer/OrcaSlicer/releases/download/v2.4.0/OrcaSlicer_Linux_AppImage_Ubuntu2404_V2.4.0.AppImage";
-      hash = "sha256-RlVhl9zC+1UUDgsecMKLTE2jII8SpKJSIBKDfJ137hA=";
+      url = "https://github.com/OrcaSlicer/OrcaSlicer/releases/download/v2.4.2/OrcaSlicer_Linux_AppImage_Ubuntu2404_V2.4.2.AppImage";
+      hash = "sha256-0S+4yOrBrs0t+2N3rNSPmU+PpDntUpL6Uy3YKIDwKf0=";
     };
-    extraPkgs = pkgs: with pkgs; [
-      gst_all_1.gst-libav
-      gst_all_1.gst-plugins-bad
-      (gst_all_1.gst-plugins-good.override {gtkSupport = true;})
-      libsoup_3
-      webkitgtk_4_1
-    ];
+    extraPkgs = pkgs:
+      with pkgs; [
+        gst_all_1.gst-libav
+        gst_all_1.gst-plugins-bad
+        (gst_all_1.gst-plugins-good.override {gtkSupport = true;})
+        libsoup_3
+        webkitgtk_4_1
+      ];
   };
   orca-slicer-mime-types = [
     "application/sla"

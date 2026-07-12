@@ -1,8 +1,5 @@
 {self, ...}: {
-  flake.homeModules.commonLinuxDesktop = {
-    pkgs,
-    ...
-  }: {
+  flake.homeModules.commonLinuxDesktop = {pkgs, ...}: {
     imports = [
       self.homeModules.commonDefault
       self.homeModules.commonSops
@@ -17,6 +14,7 @@
     };
 
     home.pointerCursor = {
+      enable = true;
       name = "macOS";
       size = 24;
       package = pkgs.apple-cursor;
