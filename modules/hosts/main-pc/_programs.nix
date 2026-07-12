@@ -69,9 +69,8 @@
           "vision"
           "--image-responses"
           "allow"
-          "--user-data-dir"
-          "${config.xdg.cacheHome}/playwright-mcp"
         ];
+        environment.PLAYWRIGHT_MCP_USER_DATA_DIR = "${config.xdg.cacheHome}/playwright-mcp";
         enabled = true;
       };
       settings.mcp.searxng = {
