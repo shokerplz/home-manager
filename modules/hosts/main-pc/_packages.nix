@@ -38,6 +38,7 @@ in {
     yandex-cloud
     shadps4
     telegram-desktop
+    claude-code
   ];
 
   xdg.desktopEntries.orca-slicer = {
