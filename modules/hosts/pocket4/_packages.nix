@@ -14,6 +14,5 @@
     yandex-cloud
     shadps4
     telegram-desktop
-    iio-hyprland
   ];
 }
