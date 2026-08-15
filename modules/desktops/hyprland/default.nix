@@ -202,8 +202,8 @@
         ];
 
         bindm = [
-          "ALT, mouse:272, movewindow"
-          "ALT, mouse:273, resizewindow"
+          "SHIFT ALT, mouse:272, movewindow"
+          "SHIFT ALT, mouse:273, resizewindow"
         ];
 
         exec-once = [
