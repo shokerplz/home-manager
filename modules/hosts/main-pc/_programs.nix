@@ -1,4 +1,8 @@
-{config, pkgs, ...}: {
+{
+  config,
+  camoufox-mcp,
+  ...
+}: {
   programs = {
     firefox = {
       enable = true;
@@ -61,16 +65,16 @@
         edit = "ask";
         bash = "ask";
       };
-      settings.mcp.playwright = {
+      settings.mcp.camoufox = {
         type = "local";
         command = [
-          "${pkgs.playwright-mcp}/bin/playwright-mcp"
+          "${camoufox-mcp}/bin/camoufox-mcp"
           "--caps"
           "vision"
           "--image-responses"
           "allow"
         ];
-        environment.PLAYWRIGHT_MCP_USER_DATA_DIR = "${config.xdg.cacheHome}/playwright-mcp";
+        environment.PLAYWRIGHT_MCP_USER_DATA_DIR = "${config.xdg.cacheHome}/camoufox-mcp";
         enabled = true;
       };
       settings.mcp.searxng = {

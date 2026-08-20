@@ -1,4 +1,8 @@
-{pkgs, ...}: let
+{
+  pkgs,
+  camoufox-mcp,
+  ...
+}: let
   orca-slicer-appimage = pkgs.appimageTools.wrapType2 {
     pname = "orca-slicer";
     version = "2.4.2";
@@ -39,6 +43,7 @@ in {
     shadps4
     telegram-desktop
     claude-code
+    camoufox-mcp
   ];
 
   xdg.desktopEntries.orca-slicer = {
