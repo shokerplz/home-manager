@@ -6,6 +6,28 @@
     ...
   }: let
     ipc = "${lib.getExe config.programs.noctalia-shell.package} ipc call";
+    clipboardShortcut = pkgs.writeShellScript "clipboard-shortcut" ''
+      # The compositor starts this on key release. Give the physical Meta key
+      # time to come up before injecting the application-specific shortcut.
+      ${lib.getExe' pkgs.coreutils "sleep"} 0.001
+
+      activeClass="$(${lib.getExe' pkgs.hyprland "hyprctl"} -j activewindow | ${lib.getExe pkgs.jq} -r '(.class // "") | ascii_downcase')"
+
+      case "$1:$activeClass" in
+        copy:alacritty|copy:kitty|copy:foot|copy:wezterm|copy:org.wezfurlong.wezterm|copy:com.mitchellh.ghostty|copy:konsole)
+          ${lib.getExe pkgs.wtype} -M ctrl -M shift -k c -m shift -m ctrl
+          ;;
+        paste:alacritty|paste:kitty|paste:foot|paste:wezterm|paste:org.wezfurlong.wezterm|paste:com.mitchellh.ghostty|paste:konsole)
+          ${lib.getExe pkgs.wtype} -M ctrl -M shift -k v -m shift -m ctrl
+          ;;
+        copy:*)
+          ${lib.getExe pkgs.wtype} -M ctrl -k c -m ctrl
+          ;;
+        paste:*)
+          ${lib.getExe pkgs.wtype} -M ctrl -k v -m ctrl
+          ;;
+      esac
+    '';
   in {
     services.udiskie = {
       enable = true;
@@ -185,6 +207,11 @@
           "$mod SHIFT, 7, movetoworkspace, 7"
           "$mod SHIFT, 8, movetoworkspace, 8"
           "$mod SHIFT, 9, movetoworkspace, 9"
+        ];
+
+        bindr = [
+          "$mod, C, exec, ${clipboardShortcut} copy"
+          "$mod, V, exec, ${clipboardShortcut} paste"
         ];
 
         bindel = [
