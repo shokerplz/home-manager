@@ -7,10 +7,6 @@
   }: let
     ipc = "${lib.getExe config.programs.noctalia-shell.package} ipc call";
     clipboardShortcut = pkgs.writeShellScript "clipboard-shortcut" ''
-      # The compositor starts this on key release. Give the physical Meta key
-      # time to come up before injecting the application-specific shortcut.
-      ${lib.getExe' pkgs.coreutils "sleep"} 0.001
-
       activeClass="$(${lib.getExe' pkgs.hyprland "hyprctl"} -j activewindow | ${lib.getExe pkgs.jq} -r '(.class // "") | ascii_downcase')"
 
       case "$1:$activeClass" in
@@ -210,8 +206,8 @@
         ];
 
         bindr = [
-          "$mod, C, exec, ${clipboardShortcut} copy"
-          "$mod, V, exec, ${clipboardShortcut} paste"
+          ", F23, exec, ${clipboardShortcut} copy"
+          ", F24, exec, ${clipboardShortcut} paste"
         ];
 
         bindel = [
