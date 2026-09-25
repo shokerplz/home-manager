@@ -1,7 +1,7 @@
 {pkgs, ...}: {
   home.packages = with pkgs; [
     vlc
-    libreoffice-qt6-fresh
+    libreoffice-qt-stable
     godot
     devenv
     orca-slicer
