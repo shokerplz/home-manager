@@ -1,5 +1,6 @@
 {...}: {
   flake.homeModules.commonDefault = {
+    lib,
     pkgs,
     ...
   }: {
@@ -7,22 +8,18 @@
       EDITOR = "nvim";
     };
 
-    home.packages = with pkgs; [
-      fd
-      gcc
-      git
-      jq
-      ripgrep
-      xclip
-      dconf
-      yq
-    ];
+    home.packages = with pkgs;
+      [fd]
+      ++ lib.optional pkgs.stdenv.hostPlatform.isLinux gcc
+      ++ [git jq ripgrep]
+      ++ lib.optionals pkgs.stdenv.hostPlatform.isLinux [xclip dconf]
+      ++ [yq];
 
     programs.home-manager.enable = true;
 
     programs.bash = {
       enable = true;
-      sessionVariables = {
+      sessionVariables = lib.optionalAttrs pkgs.stdenv.hostPlatform.isLinux {
         TERMINAL = "alacritty";
         QT_QPA_PLATFORMTHEME = "adwaita";
       };
@@ -72,6 +69,5 @@
       keys = ["~/.ssh/do_key"];
       extraFlags = ["--quiet"];
     };
-
   };
 }

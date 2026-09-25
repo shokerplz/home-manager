@@ -1,9 +1,9 @@
 {...}: {
   flake.homeModules.platformDarwin = {
-	my-neovim,
-	...
-
+    my-neovim,
+    ...
   }: {
-	home.packages = [my-neovim];
+    home.packages = [my-neovim];
+    programs.bash.sessionVariables.BASH_SILENCE_DEPRECATION_WARNING = "1";
   };
 }
