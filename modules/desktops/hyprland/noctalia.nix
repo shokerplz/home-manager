@@ -29,6 +29,14 @@
         systemd.enable = false;
         package = noctaliaPackage.overrideAttrs (old: {
           postPatch = (old.postPatch or "") + ''
+            # Qt 6.12's Color singleton shadows Noctalia's theme singleton.
+            mv Commons/Color.qml Commons/NColor.qml
+            find . -name '*.qml' -exec sed -i 's/\bColor\./NColor./g' {} +
+            substituteInPlace \
+              Modules/Bar/Widgets/MediaMini.qml \
+              Services/UI/WallpaperService.qml \
+              --replace-fail 'target: Color' 'target: NColor'
+
             substituteInPlace Services/Keyboard/ClipboardService.qml \
               --replace-fail \
                 'const pasteKeys = isImage ? "wtype -M ctrl -k v" : "wtype -M ctrl -M shift v";' \
