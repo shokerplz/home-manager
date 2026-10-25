@@ -5,10 +5,10 @@
 }: let
   orca-slicer-appimage = pkgs.appimageTools.wrapType2 {
     pname = "orca-slicer";
-    version = "2.4.2";
+    version = "2.5.0-alpha";
     src = pkgs.fetchurl {
-      url = "https://github.com/OrcaSlicer/OrcaSlicer/releases/download/v2.4.2/OrcaSlicer_Linux_AppImage_Ubuntu2404_V2.4.2.AppImage";
-      hash = "sha256-0S+4yOrBrs0t+2N3rNSPmU+PpDntUpL6Uy3YKIDwKf0=";
+      url = "https://github.com/OrcaSlicer/OrcaSlicer/releases/download/v2.5.0-alpha/OrcaSlicer_Linux_AppImage_Ubuntu2404_V2.5.0-alpha.AppImage";
+      hash = "sha256-OGpe84mRpPwyri417kJhvqQ9mDaDrGdaLC4jlasrx7s=";
     };
     extraPkgs = pkgs:
       with pkgs; [
