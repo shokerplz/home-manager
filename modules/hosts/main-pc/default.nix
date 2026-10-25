@@ -12,7 +12,7 @@
     inputs.home-manager.lib.homeManagerConfiguration {
       pkgs = pkgs-unstable;
       extraSpecialArgs = {
-        inherit (self'.packages) my-neovim;
+        inherit (self'.packages) my-neovim camoufox-mcp;
       };
       modules = [
         self.homeModules.commonLinuxDesktop

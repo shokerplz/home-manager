@@ -6,7 +6,12 @@
     ...
   }: let
     cfg = config.dotfiles.noctalia;
-    noctaliaPackage = inputs.noctalia.packages.${pkgs.stdenv.hostPlatform.system}.default;
+    quickshellPackage = inputs.noctalia.inputs.noctalia-qs.packages.${pkgs.stdenv.hostPlatform.system}.default.overrideAttrs (old: {
+      patches = (old.patches or []) ++ [../../../patches/quickshell-qt612.patch];
+    });
+    noctaliaPackage = inputs.noctalia.packages.${pkgs.stdenv.hostPlatform.system}.default.override {
+      quickshell = quickshellPackage;
+    };
   in {
     options.dotfiles.noctalia.settingsFile = lib.mkOption {
       type = lib.types.path;

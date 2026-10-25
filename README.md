@@ -26,6 +26,12 @@ Switch the current user configuration:
 home-manager switch --flake .#ikovalev@main-pc
 ```
 
+Switch on macbook:
+
+```bash
+sudo darwin-rebuild switch --flake .#macbook
+```
+
 ## Adding A New Host
 
 1. Create `modules/hosts/<name>/default.nix`.

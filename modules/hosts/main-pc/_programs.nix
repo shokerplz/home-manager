@@ -1,4 +1,8 @@
-{config, pkgs, ...}: {
+{
+  config,
+  camoufox-mcp,
+  ...
+}: {
   programs = {
     firefox = {
       enable = true;
@@ -10,8 +14,21 @@
     discord.enable = true;
     codex.enable = true;
     antigravity-cli.enable = true;
+    pi-coding-agent.enable = true;
     opencode = {
       enable = true;
+      settings.provider."NVIDIA NIM" = {
+        npm = "@ai-sdk/openai-compatible";
+        name = "Nvidia NIM Free";
+        options.baseURL = "https://integrate.api.nvidia.com/v1";
+        models."moonshotai/kimi-k3" = {
+          name = "Kimi-K3";
+          limit = {
+            context = 1000000;
+            output = 16384;
+          };
+        };
+      };
       settings.agent = {
         explore = {
           model = "openai/gpt-5.6-luna";
@@ -61,16 +78,16 @@
         edit = "ask";
         bash = "ask";
       };
-      settings.mcp.playwright = {
+      settings.mcp.camoufox = {
         type = "local";
         command = [
-          "${pkgs.playwright-mcp}/bin/playwright-mcp"
+          "${camoufox-mcp}/bin/camoufox-mcp"
           "--caps"
           "vision"
           "--image-responses"
           "allow"
         ];
-        environment.PLAYWRIGHT_MCP_USER_DATA_DIR = "${config.xdg.cacheHome}/playwright-mcp";
+        environment.PLAYWRIGHT_MCP_USER_DATA_DIR = "${config.xdg.cacheHome}/camoufox-mcp";
         enabled = true;
       };
       settings.mcp.searxng = {
