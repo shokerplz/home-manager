@@ -1,5 +1,47 @@
 {
   "nodes": {
+    "claude-code": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs-unstable"
+        ],
+        "systems": "systems"
+      },
+      "locked": {
+        "lastModified": 1793988107,
+        "narHash": "sha256-O91/HnND0xTpdCecUJedsfRU2n/V5xdTLV4iplOXS7Y=",
+        "owner": "sadjow",
+        "repo": "claude-code-nix",
+        "rev": "623c716377e67e88cd96e505928a03b087e00e8a",
+        "type": "github"
+      },
+      "original": {
+        "owner": "sadjow",
+        "repo": "claude-code-nix",
+        "type": "github"
+      }
+    },
+    "claude-desktop": {
+      "inputs": {
+        "flake-utils": "flake-utils",
+        "nixpkgs": [
+          "nixpkgs-unstable"
+        ]
+      },
+      "locked": {
+        "lastModified": 1793993497,
+        "narHash": "sha256-KuB2qvWR/hAxcpqB7qg67z1nVH+hcPv6CF/VVz7U/u0=",
+        "owner": "patrickjaja",
+        "repo": "claude-desktop-extra",
+        "rev": "98212760c3dbdd60a0387f5b494cebf49eadabd9",
+        "type": "github"
+      },
+      "original": {
+        "owner": "patrickjaja",
+        "repo": "claude-desktop-extra",
+        "type": "github"
+      }
+    },
     "flake-compat": {
       "flake": false,
       "locked": {
@@ -31,6 +73,24 @@
       "original": {
         "owner": "hercules-ci",
         "repo": "flake-parts",
+        "type": "github"
+      }
+    },
+    "flake-utils": {
+      "inputs": {
+        "systems": "systems_2"
+      },
+      "locked": {
+        "lastModified": 1791914995,
+        "narHash": "sha256-Zf/xfQEAasnwnmEfHqW/4hjDE/s44yn2hD4RuVIZRjA=",
+        "owner": "numtide",
+        "repo": "flake-utils",
+        "rev": "b7a79d3fea1e214f6d668d521cecec0c01e26544",
+        "type": "github"
+      },
+      "original": {
+        "owner": "numtide",
+        "repo": "flake-utils",
         "type": "github"
       }
     },
@@ -163,7 +223,7 @@
           "noctalia",
           "nixpkgs"
         ],
-        "systems": "systems",
+        "systems": "systems_3",
         "treefmt-nix": "treefmt-nix"
       },
       "locked": {
@@ -204,6 +264,8 @@
     },
     "root": {
       "inputs": {
+        "claude-code": "claude-code",
+        "claude-desktop": "claude-desktop",
         "flake-parts": "flake-parts",
         "home-manager": "home-manager",
         "import-tree": "import-tree",
@@ -235,6 +297,36 @@
       }
     },
     "systems": {
+      "locked": {
+        "lastModified": 1791244623,
+        "narHash": "sha256-uuanbkFk8a313Zfrxdcz8Us/yQtaxNnKJtX8v0ZPpd8=",
+        "owner": "nix-systems",
+        "repo": "default",
+        "rev": "d36eeed142f88b5a636f2e3856a53c61654cf29b",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nix-systems",
+        "repo": "default",
+        "type": "github"
+      }
+    },
+    "systems_2": {
+      "locked": {
+        "lastModified": 1681028828,
+        "narHash": "sha256-Vy1rq5AaRuLzOxct8nz4T6wlgyUR7zLU309k9mBC768=",
+        "owner": "nix-systems",
+        "repo": "default",
+        "rev": "da67096a3b9bf56a91d16901293e51ba5b49a27e",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nix-systems",
+        "repo": "default",
+        "type": "github"
+      }
+    },
+    "systems_3": {
       "locked": {
         "lastModified": 1689347949,
         "narHash": "sha256-12tWmuL2zgBgZkdoB6qXZsgJEH9LR3oUgpaQq2RbI80=",

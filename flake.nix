@@ -23,6 +23,14 @@
 
     flake-parts.url = "github:hercules-ci/flake-parts";
     import-tree.url = "github:vic/import-tree";
+    claude-code = {
+      url = "github:sadjow/claude-code-nix";
+      inputs.nixpkgs.follows = "nixpkgs-unstable";
+    };
+    claude-desktop = {
+      url = "github:patrickjaja/claude-desktop-extra";
+      inputs.nixpkgs.follows = "nixpkgs-unstable";
+    };
   };
 
   outputs = inputs:

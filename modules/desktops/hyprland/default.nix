@@ -118,8 +118,7 @@
 
         decoration = {
           rounding = 10;
-          dim_inactive = true;
-          dim_strength = 0.15;
+          dim_inactive = false;
 
           blur = {
             enabled = true;
