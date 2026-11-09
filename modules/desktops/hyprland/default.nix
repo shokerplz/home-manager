@@ -150,6 +150,8 @@
           disable_hyprland_logo = true;
           disable_splash_rendering = true;
           animate_manual_resizes = true;
+          # Variable refresh rate for fullscreen windows only (games capped below the monitor's rate).
+          vrr = 2;
         };
 
         cursor.no_hardware_cursors = true;
