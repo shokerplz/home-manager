@@ -3,7 +3,12 @@
   inputs,
   ...
 }: {
-  flake.homeModules.commonLinuxDesktop = {pkgs, ...}: {
+  flake.homeModules.commonLinuxDesktop = {
+    config,
+    lib,
+    pkgs,
+    ...
+  }: {
     imports = [
       self.homeModules.commonDefault
       self.homeModules.commonSops
@@ -13,6 +18,13 @@
     ];
 
     home.packages = [inputs.fleet.packages.${pkgs.stdenv.hostPlatform.system}.default];
+
+    # SDDM sources ~/.profile before starting Hyprland: running keychain there
+    # gives the whole session (and apps started from the launcher) the same
+    # agent the shells use. The keys have no passphrase, so no prompt is needed.
+    programs.bash.profileExtra = ''
+      eval "$(SHELL=bash ${lib.getExe config.programs.keychain.package} --eval --quiet ${lib.concatStringsSep " " config.programs.keychain.keys})"
+    '';
 
     programs.ssh = {
       enable = true;
