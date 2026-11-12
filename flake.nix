@@ -27,6 +27,10 @@
       url = "github:sadjow/claude-code-nix";
       inputs.nixpkgs.follows = "nixpkgs-unstable";
     };
+    fleet = {
+      url = "git+ssh://gitlab@git.ikovalev.nl/nix/fleet.git";
+      inputs.nixpkgs.follows = "nixpkgs-unstable";
+    };
     claude-desktop = {
       url = "github:patrickjaja/claude-desktop-extra";
       inputs.nixpkgs.follows = "nixpkgs-unstable";

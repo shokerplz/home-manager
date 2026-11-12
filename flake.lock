@@ -94,6 +94,26 @@
         "type": "github"
       }
     },
+    "fleet": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs-unstable"
+        ]
+      },
+      "locked": {
+        "lastModified": 1794513573,
+        "narHash": "sha256-80bKIHATj/sf7htUP3EdeVEM0wLGSV/id1+5yOWArq0=",
+        "ref": "refs/heads/main",
+        "rev": "81515d62b0d659c40092ec1baed6d9aee7ead290",
+        "revCount": 2,
+        "type": "git",
+        "url": "ssh://gitlab@git.ikovalev.nl/nix/fleet.git"
+      },
+      "original": {
+        "type": "git",
+        "url": "ssh://gitlab@git.ikovalev.nl/nix/fleet.git"
+      }
+    },
     "home-manager": {
       "inputs": {
         "nixpkgs": [
@@ -267,6 +287,7 @@
         "claude-code": "claude-code",
         "claude-desktop": "claude-desktop",
         "flake-parts": "flake-parts",
+        "fleet": "fleet",
         "home-manager": "home-manager",
         "import-tree": "import-tree",
         "nix-darwin": "nix-darwin",

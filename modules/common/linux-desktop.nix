@@ -1,4 +1,8 @@
-{self, ...}: {
+{
+  self,
+  inputs,
+  ...
+}: {
   flake.homeModules.commonLinuxDesktop = {pkgs, ...}: {
     imports = [
       self.homeModules.commonDefault
@@ -7,6 +11,8 @@
       self.homeModules.desktopHyprland
       self.homeModules.desktopNoctalia
     ];
+
+    home.packages = [inputs.fleet.packages.${pkgs.stdenv.hostPlatform.system}.default];
 
     programs.ssh = {
       enable = true;
