@@ -5,7 +5,14 @@
     pkgs,
     ...
   }: let
-    ipc = "${lib.getExe config.programs.noctalia-shell.package} ipc call";
+    # Address the running shell by PID: quickshell matches IPC to instances by config
+    # path, a store path that changes on every switch while the login shell keeps running.
+    ipc = pkgs.writeShellScript "noctalia-ipc" ''
+      export QS_CONFIG_PATH=
+      noctalia=${lib.getExe config.programs.noctalia-shell.package}
+      pid="$("$noctalia" list --all --json | ${lib.getExe pkgs.jq} -r 'map(select(.config_path | contains("noctalia-shell"))) | last | .pid')"
+      exec "$noctalia" ipc --pid "$pid" call "$@"
+    '';
     clipboardShortcut = pkgs.writeShellScript "clipboard-shortcut" ''
       activeClass="$(${lib.getExe' pkgs.hyprland "hyprctl"} -j activewindow | ${lib.getExe pkgs.jq} -r '(.class // "") | ascii_downcase')"
 
