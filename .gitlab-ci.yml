@@ -45,15 +45,11 @@ daily-update:
       git remote set-url origin gitlab@git.ikovalev.nl:nix/home-manager.git
       export GIT_SSH_COMMAND="ssh -i ~/.ssh/id_ed25519 -o IdentitiesOnly=yes"
 
-      # Checkout daily branch
-      echo "Fetching daily branch..."
+      # Rebuild daily from main each run. Daily only ever holds a regenerated
+      # flake.lock, so merging the old one back in just causes conflicts.
+      echo "Resetting daily to $DEFAULT_BRANCH..."
       git fetch origin
-      if git show-ref --verify --quiet refs/remotes/origin/daily; then
-        git checkout -B daily origin/daily
-      else
-        git checkout -B daily "origin/$DEFAULT_BRANCH"
-      fi
-      git merge --no-edit "origin/$DEFAULT_BRANCH"
+      git checkout -B daily "origin/$DEFAULT_BRANCH"
 
       # Update Flake
       nix --extra-experimental-features 'nix-command flakes' flake update
@@ -65,7 +61,7 @@ daily-update:
       else
         echo "No changes in flake.lock. Retrying validation."
       fi
-      git push origin daily
+      git push --force origin daily
       build_revision=$(git rev-parse HEAD)
 
       echo "Triggering build on nix-local-cache..."
