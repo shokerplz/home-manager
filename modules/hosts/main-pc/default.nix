@@ -26,7 +26,10 @@
             stateVersion = "24.11";
           };
 
-          dotfiles.noctalia.settingsFile = ./noctalia.json;
+          programs.noctalia.settings = {
+            notification.monitors = ["DP-2"];
+            brightness.enable_ddcutil = true;
+          };
         }
       ];
     });

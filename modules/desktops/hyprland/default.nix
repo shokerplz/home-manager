@@ -5,14 +5,7 @@
     pkgs,
     ...
   }: let
-    # Address the running shell by PID: quickshell matches IPC to instances by config
-    # path, a store path that changes on every switch while the login shell keeps running.
-    ipc = pkgs.writeShellScript "noctalia-ipc" ''
-      export QS_CONFIG_PATH=
-      noctalia=${lib.getExe config.programs.noctalia-shell.package}
-      pid="$("$noctalia" list --all --json | ${lib.getExe pkgs.jq} -r 'map(select(.config_path | contains("noctalia-shell"))) | last | .pid')"
-      exec "$noctalia" ipc --pid "$pid" call "$@"
-    '';
+    ipc = "${lib.getExe config.programs.noctalia.package} msg";
     clipboardShortcut = pkgs.writeShellScript "clipboard-shortcut" ''
       activeClass="$(${lib.getExe' pkgs.hyprland "hyprctl"} -j activewindow | ${lib.getExe pkgs.jq} -r '(.class // "") | ascii_downcase')"
 
@@ -186,13 +179,13 @@
           "CTRL, Q, killactive,"
           "$mod, M, exit,"
           "ALT, V, togglefloating,"
-          "$mod, SPACE, exec, ${ipc} launcher toggle"
+          "$mod, SPACE, exec, ${ipc} panel-toggle launcher"
           "SUPER SHIFT, F, fullscreen"
           "CTRL, SPACE, exec, hyprctl switchxkblayout all next"
-          "SUPER SHIFT, V, exec, ${ipc} launcher clipboard"
+          "SUPER SHIFT, V, exec, ${ipc} panel-toggle clipboard"
           "$mod, Tab, cyclenext, visible hist"
           "$mod SHIFT, Tab, cyclenext, prev visible hist"
-          ", Print, exec, ${ipc} plugin:screen-shot-and-record screenshot"
+          ", Print, exec, ${ipc} screenshot-region"
           "$mod, 1, workspace, 1"
           "$mod, 2, workspace, 2"
           "$mod, 3, workspace, 3"
@@ -219,15 +212,15 @@
         ];
 
         bindel = [
-          ", XF86AudioRaiseVolume, exec, ${ipc} volume increase"
-          ", XF86AudioLowerVolume, exec, ${ipc} volume decrease"
-          ", XF86MonBrightnessUp, exec, ${ipc} brightness increase"
-          ", XF86MonBrightnessDown, exec, ${ipc} brightness decrease"
+          ", XF86AudioRaiseVolume, exec, ${ipc} volume-up"
+          ", XF86AudioLowerVolume, exec, ${ipc} volume-down"
+          ", XF86MonBrightnessUp, exec, ${ipc} brightness-up"
+          ", XF86MonBrightnessDown, exec, ${ipc} brightness-down"
         ];
 
         bindl = [
-          ", XF86AudioMute, exec, ${ipc} volume muteOutput"
-          ", XF86AudioPlay, exec, ${ipc} media playPause"
+          ", XF86AudioMute, exec, ${ipc} volume-mute"
+          ", XF86AudioPlay, exec, ${ipc} media toggle"
           ", XF86AudioNext, exec, ${ipc} media next"
           ", XF86AudioPrev, exec, ${ipc} media previous"
         ];
@@ -239,7 +232,8 @@
 
         exec-once = [
           "${pkgs.kdePackages.polkit-kde-agent-1}/libexec/polkit-kde-authentication-agent-1"
-          (lib.getExe config.programs.noctalia-shell.package)
+          # v4 (Qt) showed English dates; v5 follows LC_TIME, which is nl_NL here.
+          "env LC_TIME=en_US.UTF-8 ${lib.getExe config.programs.noctalia.package}"
         ];
       };
     };

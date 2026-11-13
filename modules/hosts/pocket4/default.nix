@@ -45,8 +45,6 @@
             stateVersion = "24.11";
           };
 
-          dotfiles.noctalia.settingsFile = ./noctalia.json;
-
           wayland.windowManager.hyprland.settings = {
             monitor = lib.mkBefore [
               "eDP-1,1600x2560@144,auto,1.6,transform,3"

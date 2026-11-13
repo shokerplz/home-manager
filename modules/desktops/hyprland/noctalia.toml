@@ -1,0 +1,213 @@
+# Noctalia v5 config, mapped from the v4 settings JSON to look and behave the same.
+
+[shell]
+font_family = "FreeSans"
+corner_radius_scale = 0.65
+clipboard_auto_paste = "auto"
+avatar_path = "~/.face"
+telemetry_enabled = false
+
+# v4 session menu: vertical list, Suspend/Reboot/Shutdown/Reboot-to-UEFI on keys 1-4, 1 s countdown.
+[shell.session]
+grid = true
+grid_columns = 1
+show_shortcuts = true
+
+[[shell.session.actions]]
+action = "suspend"
+shortcut = "1"
+countdown_seconds = 1
+
+[[shell.session.actions]]
+action = "reboot"
+shortcut = "2"
+countdown_seconds = 1
+
+[[shell.session.actions]]
+action = "shutdown"
+shortcut = "3"
+countdown_seconds = 1
+
+[[shell.session.actions]]
+action = "reboot_uefi"
+shortcut = "4"
+countdown_seconds = 1
+
+[shell.screenshot]
+directory = "~/Pictures/Screenshots"
+copy_to_clipboard = true
+
+# v4 opened bar panels next to the clicked button, not at bar center.
+[shell.panel]
+open_near_click_control_center = true
+open_near_click_wallpaper = true
+open_near_click_session = true
+
+[shell.launcher]
+pinned = ["Alacritty"]
+sort_by_usage = true
+
+[theme]
+mode = "dark"
+source = "builtin"
+builtin = "Ayu"
+
+[wallpaper]
+enabled = false
+
+[notification]
+position = "top_right"
+
+[osd]
+position = "top_right"
+hide_delay_ms = 2000
+
+[weather]
+enabled = true
+unit = "celsius"
+
+[location]
+address = "Netherlands"
+
+[dock]
+enabled = true
+position = "bottom"
+auto_hide = true
+active_monitor_only = true
+reserve_space = false
+
+[plugins]
+enabled = ["noctalia/screen_recorder"]
+auto_update = "all"
+
+[plugin_settings."noctalia/screen_recorder"]
+video_source = "region"
+directory = "~/Videos"
+
+[[control_center.shortcuts]]
+type = "wifi"
+[[control_center.shortcuts]]
+type = "bluetooth"
+[[control_center.shortcuts]]
+type = "wallpaper"
+[[control_center.shortcuts]]
+type = "notification"
+[[control_center.shortcuts]]
+type = "power_profile"
+[[control_center.shortcuts]]
+type = "caffeine"
+
+# ── Bar: full-width, flush to the top edge, every widget in its own pill ─────
+
+[bar.main]
+position = "top"
+thickness = 31
+background_opacity = 0.93
+radius = 0
+margin_ends = 0
+margin_edge = 0
+padding = 6
+widget_spacing = 8
+font_scale = 0.9
+font_weight = 700
+shadow = true
+capsule = true
+capsule_fill = "surface_container"
+
+start = ["launcher", "active_window", "media", "group:sysmon"]
+center = ["notifications", "taskbar", "clock"]
+end = ["screenshot", "recorder", "tray", "battery", "volume", "brightness", "network", "control-center"]
+
+[[bar.main.capsule_group]]
+id = "sysmon"
+members = ["cpu", "temp", "gpu", "gpu_temp", "ram", "net_rx", "net_tx"]
+fill = "surface_container"
+
+[widget.launcher]
+glyph = "rocket"
+
+[widget.active_window]
+max_length = 145
+title_scroll = "on_hover"
+show_empty_label = false
+
+[widget.media]
+artist_first = true
+max_length = 145
+title_scroll = "on_hover"
+hide_when_no_media = true
+
+[widget.cpu]
+type = "sysmon"
+stat = "cpu_usage"
+visualization = "none"
+font_family = "Hack Nerd Font Mono"
+
+[widget.temp]
+type = "sysmon"
+stat = "cpu_temp"
+visualization = "none"
+font_family = "Hack Nerd Font Mono"
+
+# RX 9070: v5 reads the first awake amdgpu card, which here is card1 (the dGPU).
+[widget.gpu]
+type = "sysmon"
+stat = "gpu_usage"
+visualization = "none"
+font_family = "Hack Nerd Font Mono"
+
+[widget.gpu_temp]
+type = "sysmon"
+stat = "gpu_temp"
+visualization = "none"
+font_family = "Hack Nerd Font Mono"
+
+[widget.ram]
+type = "sysmon"
+stat = "ram_used"
+visualization = "none"
+font_family = "Hack Nerd Font Mono"
+
+[widget.net_rx]
+type = "sysmon"
+stat = "net_rx"
+visualization = "none"
+network_speed_compact = true
+font_family = "Hack Nerd Font Mono"
+
+[widget.net_tx]
+type = "sysmon"
+stat = "net_tx"
+visualization = "none"
+network_speed_compact = true
+font_family = "Hack Nerd Font Mono"
+
+[widget.notifications]
+hide_when_no_unread = false
+
+# v4 "Workspace" widget with app icons = v5 taskbar grouped by workspace.
+[widget.taskbar]
+# No outer pill: the workspace outline itself is the pill, with v4-sized icons.
+capsule = false
+icon_scale = 1.3
+group_by_workspace = true
+label_source = "id"
+hide_empty_workspaces = true
+
+[widget.clock]
+format = "{:%H:%M %a, %b %d}"
+tooltip_format = "{:%H:%M:%S %a, %b %d}"
+
+[widget.recorder]
+type = "noctalia/screen_recorder:recorder"
+
+[widget.tray]
+drawer = true
+hide_passive = false
+
+[widget.volume]
+show_label = false
+
+[widget.network]
+vpn_status = "replace"
+show_label = false
