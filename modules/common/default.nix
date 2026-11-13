@@ -67,7 +67,9 @@
     programs.keychain = {
       enable = true;
       keys = ["~/.ssh/do_key"];
-      extraFlags = ["--quiet"];
+      # keychain 3 otherwise waits for Enter before loading keys, which stalls the
+      # SDDM login (it sources ~/.profile) on a blank screen.
+      extraFlags = ["--quiet" "--immediate"];
     };
   };
 }

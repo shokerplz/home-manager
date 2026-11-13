@@ -23,7 +23,7 @@
     # gives the whole session (and apps started from the launcher) the same
     # agent the shells use. The keys have no passphrase, so no prompt is needed.
     programs.bash.profileExtra = ''
-      eval "$(SHELL=bash ${lib.getExe config.programs.keychain.package} --eval --quiet ${lib.concatStringsSep " " config.programs.keychain.keys})"
+      eval "$(SHELL=bash ${lib.getExe config.programs.keychain.package} --eval ${lib.escapeShellArgs config.programs.keychain.extraFlags} ${lib.concatStringsSep " " config.programs.keychain.keys})"
     '';
 
     programs.ssh = {
