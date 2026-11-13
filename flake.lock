@@ -101,11 +101,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1794514062,
-        "narHash": "sha256-22++aDLzr7aU4ZtSIRQzfp/6eXx2HHN7vtcxtUphq+U=",
+        "lastModified": 1794566149,
+        "narHash": "sha256-3yubb6JbulWgXAZrWLa3ibBwsF/YrcjJLKwm5ILBvJo=",
         "ref": "refs/heads/main",
-        "rev": "8b1031e43f2625484465a86298ca380141e8e85f",
-        "revCount": 3,
+        "rev": "de0aba12c755a061db88235830714d5480b88621",
+        "revCount": 4,
         "type": "git",
         "url": "ssh://gitlab@git.ikovalev.nl/nix/fleet.git"
       },
