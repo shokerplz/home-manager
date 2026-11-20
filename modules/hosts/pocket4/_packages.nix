@@ -1,4 +1,8 @@
-{pkgs, ...}: {
+{
+  pkgs,
+  claude-desktop,
+  ...
+}: {
   home.packages = with pkgs; [
     vlc
     libreoffice-qt-fresh
@@ -14,5 +18,7 @@
     yandex-cloud
     shadps4
     telegram-desktop
+    claude-code
+    claude-desktop
   ];
 }

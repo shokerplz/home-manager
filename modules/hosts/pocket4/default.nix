@@ -13,6 +13,7 @@
       pkgs = pkgs-unstable;
       extraSpecialArgs = {
         inherit (self'.packages) my-neovim camoufox-mcp;
+        claude-desktop = inputs.claude-desktop.packages.x86_64-linux.default;
       };
       modules = [
         self.homeModules.commonLinuxDesktop
