@@ -151,6 +151,8 @@
           disable_hyprland_logo = true;
           disable_splash_rendering = true;
           animate_manual_resizes = true;
+          # Follow xdg-activation requests: notification clicks and opened links focus the app.
+          focus_on_activate = true;
           # Variable refresh rate for fullscreen windows only (games capped below the monitor's rate).
           vrr = 2;
         };
